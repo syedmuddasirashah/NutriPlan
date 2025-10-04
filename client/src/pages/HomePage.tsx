@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ToolsNav } from "@/components/ToolsNav";
 import { UtensilsCrossed, Zap, Dumbbell, Plane, MapPin } from "lucide-react";
 
 const tools = [
@@ -49,10 +50,15 @@ const tools = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">My Tools</h1>
-          <ThemeToggle />
+      <header className="border-b bg-card sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+          <Link href="/">
+            <h1 className="text-xl md:text-2xl font-bold cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md">My Tools</h1>
+          </Link>
+          <div className="flex items-center gap-2">
+            <ToolsNav />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 

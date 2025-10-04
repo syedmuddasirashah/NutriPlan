@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ToolsNav } from "@/components/ToolsNav";
 import { ArrowLeft, Clock } from "lucide-react";
 
 interface Activity {
@@ -69,17 +70,22 @@ export default function TripItinerary() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header className="border-b bg-card sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <Link href="/">
               <Button variant="ghost" size="icon" data-testid="button-back">
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
-            <h1 className="text-2xl font-bold">🗺️ Trip Itinerary</h1>
+            <h1 className="text-lg md:text-2xl font-bold">🗺️ Trip Itinerary</h1>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <div className="hidden lg:block">
+              <ToolsNav />
+            </div>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
