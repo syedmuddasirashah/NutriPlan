@@ -1,0 +1,184 @@
+import { useState } from "react";
+import { Link } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { ArrowLeft, Clock } from "lucide-react";
+
+interface Activity {
+  time: string;
+  name: string;
+  description: string;
+}
+
+interface DayItinerary {
+  day: number;
+  activities: Activity[];
+}
+
+export default function TripItinerary() {
+  const [formData, setFormData] = useState({
+    destination: "",
+    days: "",
+    interests: "",
+  });
+  const [itinerary, setItinerary] = useState<DayItinerary[] | null>(null);
+
+  const generateItinerary = () => {
+    const numDays = parseInt(formData.days) || 3;
+    
+    const activityTemplates: Record<string, Activity[]> = {
+      culture: [
+        { time: "9:00 AM", name: "Museum Visit", description: "Explore local history and art" },
+        { time: "12:00 PM", name: "Traditional Lunch", description: "Try authentic local cuisine" },
+        { time: "2:00 PM", name: "Historical Sites Tour", description: "Visit landmarks and monuments" },
+        { time: "5:00 PM", name: "Cultural Show", description: "Watch traditional performance" },
+        { time: "7:00 PM", name: "Dinner at Local Restaurant", description: "Experience regional specialties" },
+      ],
+      adventure: [
+        { time: "7:00 AM", name: "Morning Hike", description: "Trek to scenic viewpoint" },
+        { time: "10:00 AM", name: "Adventure Activity", description: "Zip-lining or rock climbing" },
+        { time: "1:00 PM", name: "Lunch Break", description: "Refuel with hearty meal" },
+        { time: "3:00 PM", name: "Water Sports", description: "Kayaking or snorkeling" },
+        { time: "6:00 PM", name: "Sunset Viewing", description: "Watch sunset from peak" },
+      ],
+      relaxation: [
+        { time: "9:00 AM", name: "Spa Treatment", description: "Massage and wellness session" },
+        { time: "11:00 AM", name: "Beach Time", description: "Relax by the water" },
+        { time: "1:00 PM", name: "Leisurely Lunch", description: "Casual beachside dining" },
+        { time: "3:00 PM", name: "Pool Lounge", description: "Swim and sunbathe" },
+        { time: "6:00 PM", name: "Sunset Cocktails", description: "Drinks with a view" },
+      ],
+    };
+
+    const selectedActivities = activityTemplates[formData.interests] || activityTemplates["culture"];
+    const plan: DayItinerary[] = [];
+
+    for (let i = 0; i < numDays; i++) {
+      plan.push({
+        day: i + 1,
+        activities: selectedActivities.map(activity => ({ ...activity })),
+      });
+    }
+
+    setItinerary(plan);
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="border-b bg-card">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Button variant="ghost" size="icon" data-testid="button-back">
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+            </Link>
+            <h1 className="text-2xl font-bold">🗺️ Trip Itinerary</h1>
+          </div>
+          <ThemeToggle />
+        </div>
+      </header>
+
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>Plan Your Trip Itinerary</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="destination">Destination</Label>
+                <Input
+                  id="destination"
+                  type="text"
+                  placeholder="e.g., Paris, Tokyo, New York"
+                  value={formData.destination}
+                  onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
+                  data-testid="input-destination"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="days">Number of Days</Label>
+                <Input
+                  id="days"
+                  type="number"
+                  placeholder="3"
+                  value={formData.days}
+                  onChange={(e) => setFormData({ ...formData, days: e.target.value })}
+                  data-testid="input-days"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="interests">Travel Interests</Label>
+                <Select value={formData.interests} onValueChange={(value) => setFormData({ ...formData, interests: value })}>
+                  <SelectTrigger id="interests" data-testid="select-interests">
+                    <SelectValue placeholder="Select your interests" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="culture">Culture & History</SelectItem>
+                    <SelectItem value="adventure">Adventure & Outdoors</SelectItem>
+                    <SelectItem value="relaxation">Relaxation & Wellness</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <Button className="w-full" onClick={generateItinerary} data-testid="button-generate">
+              Generate Itinerary
+            </Button>
+          </CardContent>
+        </Card>
+
+        {itinerary && (
+          <div className="space-y-6">
+            {itinerary.map((day) => (
+              <Card key={day.day}>
+                <CardHeader className="bg-primary/10">
+                  <CardTitle>Day {day.day} - {formData.destination}</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div className="space-y-4">
+                    {day.activities.map((activity, index) => (
+                      <div key={index} className="flex gap-4 pb-4 border-b last:border-0">
+                        <div className="flex-shrink-0 w-24">
+                          <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                            <Clock className="h-4 w-4" />
+                            {activity.time}
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold mb-1" data-testid={`text-activity-${day.day}-${index}`}>
+                            {activity.name}
+                          </h4>
+                          <p className="text-sm text-muted-foreground">{activity.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+
+            <Card className="bg-secondary/10">
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">🧳 Travel Tips</h3>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• Check opening hours before visiting attractions</li>
+                  <li>• Book popular activities in advance</li>
+                  <li>• Allow flexibility for spontaneous discoveries</li>
+                  <li>• Keep a backup plan for bad weather days</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
