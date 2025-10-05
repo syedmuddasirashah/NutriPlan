@@ -30,9 +30,9 @@ export default function WorkoutGenerator() {
 
   const generateWorkout = () => {
     const days = parseInt(formData.daysPerWeek) || 3;
-    
+
     const workouts: Record<string, WorkoutDay[]> = {
-      "strength": [
+      strength: [
         {
           day: "Monday",
           focus: "Upper Body",
@@ -64,7 +64,7 @@ export default function WorkoutGenerator() {
           ],
         },
       ],
-      "cardio": [
+      cardio: [
         {
           day: "Monday",
           focus: "HIIT",
@@ -93,7 +93,7 @@ export default function WorkoutGenerator() {
           ],
         },
       ],
-      "flexibility": [
+      flexibility: [
         {
           day: "Monday",
           focus: "Yoga Flow",
@@ -130,6 +130,7 @@ export default function WorkoutGenerator() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* HEADER */}
       <header className="border-b bg-card sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 md:gap-4">
@@ -149,8 +150,14 @@ export default function WorkoutGenerator() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        <Card className="mb-8">
+      {/* Top Banner Ad */}
+      <div className="max-w-4xl mx-auto px-4 mt-6 mb-6 h-20 bg-gray-200 dark:bg-gray-700 border border-dashed border-gray-400 flex items-center justify-center text-gray-600">
+        Banner Ad Placeholder
+      </div>
+
+      <main className="max-w-4xl mx-auto px-4 py-8 space-y-8">
+        {/* FORM CARD */}
+        <Card>
           <CardHeader>
             <CardTitle>Generate Your Workout Plan</CardTitle>
           </CardHeader>
@@ -158,7 +165,10 @@ export default function WorkoutGenerator() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="goal">Fitness Goal</Label>
-                <Select value={formData.goal} onValueChange={(value) => setFormData({ ...formData, goal: value })}>
+                <Select
+                  value={formData.goal}
+                  onValueChange={(value) => setFormData({ ...formData, goal: value })}
+                >
                   <SelectTrigger id="goal" data-testid="select-goal">
                     <SelectValue placeholder="Select your fitness goal" />
                   </SelectTrigger>
@@ -172,7 +182,10 @@ export default function WorkoutGenerator() {
 
               <div className="space-y-2">
                 <Label htmlFor="days">Days Per Week</Label>
-                <Select value={formData.daysPerWeek} onValueChange={(value) => setFormData({ ...formData, daysPerWeek: value })}>
+                <Select
+                  value={formData.daysPerWeek}
+                  onValueChange={(value) => setFormData({ ...formData, daysPerWeek: value })}
+                >
                   <SelectTrigger id="days" data-testid="select-days">
                     <SelectValue placeholder="How many days can you workout?" />
                   </SelectTrigger>
@@ -188,7 +201,10 @@ export default function WorkoutGenerator() {
 
               <div className="space-y-2">
                 <Label htmlFor="level">Fitness Level</Label>
-                <Select value={formData.level} onValueChange={(value) => setFormData({ ...formData, level: value })}>
+                <Select
+                  value={formData.level}
+                  onValueChange={(value) => setFormData({ ...formData, level: value })}
+                >
                   <SelectTrigger id="level" data-testid="select-level">
                     <SelectValue placeholder="Select your level" />
                   </SelectTrigger>
@@ -207,6 +223,12 @@ export default function WorkoutGenerator() {
           </CardContent>
         </Card>
 
+        {/* Mid Content Ad */}
+        <div className="w-full my-6 h-32 bg-gray-200 dark:bg-gray-700 border border-dashed border-gray-400 flex items-center justify-center text-gray-600">
+          Mid-Content Ad Placeholder
+        </div>
+
+        {/* WORKOUT PLAN DISPLAY */}
         {workoutPlan && (
           <div className="space-y-6">
             {workoutPlan.map((workout, index) => (
@@ -217,7 +239,7 @@ export default function WorkoutGenerator() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-2">
                     {workout.exercises.map((exercise, exIndex) => (
                       <div key={exIndex} className="flex items-center justify-between p-4 bg-muted rounded-lg">
                         <div>
@@ -235,6 +257,7 @@ export default function WorkoutGenerator() {
               </Card>
             ))}
 
+            {/* Tips Card */}
             <Card className="bg-primary/10">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">💪 Tips</h3>
@@ -248,6 +271,31 @@ export default function WorkoutGenerator() {
             </Card>
           </div>
         )}
+
+        {/* SEO / Informational Content */}
+        <Card className="p-6 bg-card rounded-lg border">
+          <CardContent className="space-y-4">
+            <h2 className="text-2xl font-bold">Workout Tips & Guides</h2>
+            <p>
+              Welcome to our comprehensive <Link href="/blog">workout blog</Link>! Here you can learn how to maximize your fitness results and stay healthy.
+            </p>
+            <h3 className="text-xl font-semibold">Benefits of a Consistent Workout</h3>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Improve cardiovascular health</li>
+              <li>Build muscle strength and endurance</li>
+              <li>Enhance flexibility and mobility</li>
+              <li>Boost mental health and reduce stress</li>
+            </ul>
+            <p>
+              Learn more about proper <Link href="/workout-generator">exercise techniques</Link> and personalized routines to achieve your goals faster.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Footer Ad */}
+        <div className="w-full mt-12 h-20 bg-gray-200 dark:bg-gray-700 border border-dashed border-gray-400 flex items-center justify-center text-gray-600">
+          Footer Ad Placeholder
+        </div>
       </main>
     </div>
   );

@@ -30,7 +30,7 @@ export default function TripItinerary() {
 
   const generateItinerary = () => {
     const numDays = parseInt(formData.days) || 3;
-    
+
     const activityTemplates: Record<string, Activity[]> = {
       culture: [
         { time: "9:00 AM", name: "Museum Visit", description: "Explore local history and art" },
@@ -70,6 +70,7 @@ export default function TripItinerary() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Header */}
       <header className="border-b bg-card sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 md:gap-4">
@@ -89,7 +90,14 @@ export default function TripItinerary() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+        {/* Top Banner Ad */}
+        <div className="w-full h-20 bg-gray-200 dark:bg-gray-700 flex items-center justify-center border border-dashed border-gray-400 text-gray-600 rounded-lg">
+          Top Banner Ad Placeholder
+        </div>
+
+        {/* Trip Itinerary Form */}
         <Card className="mb-8">
           <CardHeader>
             <CardTitle>Plan Your Trip Itinerary</CardTitle>
@@ -104,7 +112,6 @@ export default function TripItinerary() {
                   placeholder="e.g., Paris, Tokyo, New York"
                   value={formData.destination}
                   onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-                  data-testid="input-destination"
                 />
               </div>
 
@@ -116,14 +123,16 @@ export default function TripItinerary() {
                   placeholder="3"
                   value={formData.days}
                   onChange={(e) => setFormData({ ...formData, days: e.target.value })}
-                  data-testid="input-days"
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="interests">Travel Interests</Label>
-                <Select value={formData.interests} onValueChange={(value) => setFormData({ ...formData, interests: value })}>
-                  <SelectTrigger id="interests" data-testid="select-interests">
+                <Select
+                  value={formData.interests}
+                  onValueChange={(value) => setFormData({ ...formData, interests: value })}
+                >
+                  <SelectTrigger id="interests">
                     <SelectValue placeholder="Select your interests" />
                   </SelectTrigger>
                   <SelectContent>
@@ -135,12 +144,18 @@ export default function TripItinerary() {
               </div>
             </div>
 
-            <Button className="w-full" onClick={generateItinerary} data-testid="button-generate">
+            <Button className="w-full" onClick={generateItinerary}>
               Generate Itinerary
             </Button>
           </CardContent>
         </Card>
 
+        {/* Mid-Content Ad */}
+        <div className="w-full h-40 bg-gray-200 dark:bg-gray-700 flex items-center justify-center border border-dashed border-gray-400 text-gray-600 rounded-lg">
+          Mid-Content Ad Placeholder
+        </div>
+
+        {/* Results (appear after Generate) */}
         {itinerary && (
           <div className="space-y-6">
             {itinerary.map((day) => (
@@ -159,9 +174,7 @@ export default function TripItinerary() {
                           </div>
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold mb-1" data-testid={`text-activity-${day.day}-${index}`}>
-                            {activity.name}
-                          </h4>
+                          <h4 className="font-semibold mb-1">{activity.name}</h4>
                           <p className="text-sm text-muted-foreground">{activity.description}</p>
                         </div>
                       </div>
@@ -171,7 +184,8 @@ export default function TripItinerary() {
               </Card>
             ))}
 
-            <Card className="bg-secondary/10">
+            {/* Tips (part of results, styled differently) */}
+            <Card className="bg-accent/10">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">🧳 Travel Tips</h3>
                 <ul className="text-sm space-y-1 text-muted-foreground">
@@ -184,6 +198,31 @@ export default function TripItinerary() {
             </Card>
           </div>
         )}
+
+        {/* SEO / Informational Content (always visible, normal formatting) */}
+        <Card className="p-6 bg-card rounded-lg border">
+          <CardContent className="space-y-4">
+            <h2 className="text-2xl font-bold">Trip Itinerary Planning Guide</h2>
+            <p>
+              Planning your trip? Our Trip Itinerary Planner helps you design a perfect daily schedule based on your destination, interests, and travel length.
+            </p>
+            <h3 className="text-xl font-semibold">Tips for a Smooth Trip</h3>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Research local attractions and opening hours</li>
+              <li>Mix cultural, adventure, and relaxation activities</li>
+              <li>Leave room for spontaneous experiences</li>
+              <li>Keep travel time and transportation in mind</li>
+            </ul>
+            <p>
+              For more ideas and expert advice, visit our <Link href="/blog/travel-itinerary-tips">Travel Itinerary Tips Blog</Link>.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Footer Ad */}
+        <div className="w-full h-20 bg-gray-200 dark:bg-gray-700 flex items-center justify-center border border-dashed border-gray-400 text-gray-600 rounded-lg">
+          Footer Ad Placeholder
+        </div>
       </main>
     </div>
   );
