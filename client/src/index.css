@@ -195,3 +195,31 @@ body {
   margin: 0;
   padding: 0;
 }
+/* === MOBILE SAFARI & TOUCH DEVICE FIXES === */
+
+/* Prevent hover effects from misbehaving on touch devices */
+@media (hover: none) {
+  /* Disable all hover transitions that can shift layout */
+  *:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    scale: 1 !important;
+  }
+
+  /* Example: disable hover animations on specific components */
+  .hover-elevate:hover,
+  .hover-elevate-2:hover,
+  .active-elevate:active {
+    background-color: inherit !important;
+  }
+
+  /* Prevent accidental zoom or hover-triggered shift on cards/tools */
+  .tool-card:hover {
+    transform: none !important;
+  }
+}
+
+/* Prevent any horizontal shift or scroll caused by hover scaling */
+html, body {
+  overflow-x: hidden;
+}
