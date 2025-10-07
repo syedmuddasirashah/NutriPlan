@@ -61,7 +61,8 @@ export default function HomePage() {
 
       {/* Header */}
       <header className="border-b bg-card sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          {/* Logo */}
           <Link href="/">
             <h1
               className="text-xl md:text-2xl font-bold cursor-pointer px-2 py-1 rounded-md transition-transform duration-200 hover:scale-105"
@@ -71,6 +72,8 @@ export default function HomePage() {
               <span style={{ color: "#333" }}>Planner.fit</span>
             </h1>
           </Link>
+
+          {/* Right tools */}
           <div className="flex items-center gap-2">
             <ToolsNav />
             <ThemeToggle />
@@ -78,13 +81,14 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Main */}
-      <main className="w-full flex-1 py-12">
-        <div className="w-full max-w-screen-sm mx-auto px-4 sm:px-6">
-          {/* Top Tabs */}
-          <Tabs defaultValue="home" className="w-full mb-8">
-            <TabsList className="flex overflow-x-auto gap-2 no-scrollbar px-2 justify-center">
-              <TabsTrigger value="home">Home</TabsTrigger>
+      {/* Top Tabs */}
+      <div className="bg-card border-b">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <Tabs defaultValue="home" className="w-full">
+            <TabsList className="flex overflow-x-auto gap-2 no-scrollbar justify-center sm:justify-start">
+              <TabsTrigger value="home">
+                <Link href="/">Home</Link>
+              </TabsTrigger>
               <TabsTrigger value="about">
                 <Link href="/about">About</Link>
               </TabsTrigger>
@@ -99,18 +103,23 @@ export default function HomePage() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
+        </div>
+      </div>
 
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Banner Ad */}
           <div className="w-full mb-8 h-20 bg-gray-200 dark:bg-gray-700 flex items-center justify-center border border-dashed border-gray-400 text-gray-600">
             Banner Ad Placeholder
           </div>
 
           {/* Tool Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {tools.map((tool) => (
               <Link key={tool.id} href={tool.path}>
                 <Card className="cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-200 overflow-hidden h-full">
-                  <CardContent className={`p-4 sm:p-8 bg-gradient-to-br ${tool.color}`}>
+                  <CardContent className={`p-8 bg-gradient-to-br ${tool.color}`}>
                     <div className="flex flex-col items-center text-center space-y-4">
                       <div className="text-6xl">{tool.emoji}</div>
                       <h3 className="text-2xl font-semibold">{tool.name}</h3>
@@ -127,7 +136,7 @@ export default function HomePage() {
           </div>
 
           {/* SEO Text Section */}
-          <section className="max-w-3xl mx-auto text-center mt-12 px-4 space-y-6">
+          <section className="max-w-3xl mx-auto text-center mt-12 px-2 sm:px-0 space-y-6">
             <h2 className="text-3xl font-bold">Welcome to LifePlanner.fit</h2>
             <p>
               LifePlanner.fit is your all-in-one solution for{" "}
@@ -145,10 +154,7 @@ export default function HomePage() {
               , and travel management.
             </p>
             <h3 className="text-2xl font-semibold">Plan Your Fitness Goals</h3>
-            <p>
-              Create personalized meal plans, track your daily calorie intake, and generate workouts
-              suited to your needs.
-            </p>
+            <p>Create personalized meal plans, track your daily calorie intake, and generate workouts suited to your needs.</p>
             <h3 className="text-2xl font-semibold">Organize Your Travel</h3>
             <p>Manage travel budgets and design trip itineraries efficiently to save time and money.</p>
             <p>
@@ -164,7 +170,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="bg-card border-t mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex gap-4 flex-wrap justify-center md:justify-start">
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
