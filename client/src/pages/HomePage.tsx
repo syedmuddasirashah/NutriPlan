@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ToolsNav } from "@/components/ToolsNav";
-import { UtensilsCrossed, Zap, Dumbbell, Plane, MapPin, Instagram, Twitter, Facebook } from "lucide-react";
+import { Instagram, Twitter, Facebook } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Helmet } from "react-helmet";
 
@@ -46,29 +46,33 @@ const tools = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
       <Helmet>
         <title>LifePlanner.fit - Your Personal Fitness & Travel Tools</title>
         <meta
           name="description"
           content="LifePlanner.fit helps you plan meals, track calories, generate workouts, manage travel budgets, and create trip itineraries easily."
         />
-        <meta name="keywords" content="meal planner, calorie calculator, workout generator, travel budget, trip itinerary, LifePlanner.fit" />
+        <meta
+          name="keywords"
+          content="meal planner, calorie calculator, workout generator, travel budget, trip itinerary, LifePlanner.fit"
+        />
       </Helmet>
 
       {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <header className="border-b bg-card sticky top-0 z-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 min-h-16 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
           <Link href="/">
             <h1
               className="text-xl md:text-2xl font-bold cursor-pointer px-2 py-1 rounded-md transition-transform duration-200 hover:scale-105"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
+              style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              <span style={{ color: '#27AE60' }}>Life</span>
-              <span style={{ color: '#333' }}>Planner.fit</span>
+              <span style={{ color: "#27AE60" }}>Life</span>
+              <span style={{ color: "#333" }}>Planner.fit</span>
             </h1>
           </Link>
-          <div className="flex items-center gap-2">
+
+          <div className="flex items-center gap-2 ml-auto">
             <ToolsNav />
             <ThemeToggle />
           </div>
@@ -80,10 +84,18 @@ export default function HomePage() {
         <Tabs defaultValue="home" className="w-full mb-8">
           <TabsList className="flex overflow-x-auto gap-2 no-scrollbar px-2 justify-center">
             <TabsTrigger value="home">Home</TabsTrigger>
-            <TabsTrigger value="about"><Link href="/about">About</Link></TabsTrigger>
-            <TabsTrigger value="privacy"><Link href="/privacy">Privacy</Link></TabsTrigger>
-            <TabsTrigger value="contact"><Link href="/contact">Contact</Link></TabsTrigger>
-            <TabsTrigger value="blog"><Link href="/blog">Blog</Link></TabsTrigger>
+            <TabsTrigger value="about">
+              <Link href="/about">About</Link>
+            </TabsTrigger>
+            <TabsTrigger value="privacy">
+              <Link href="/privacy">Privacy</Link>
+            </TabsTrigger>
+            <TabsTrigger value="contact">
+              <Link href="/contact">Contact</Link>
+            </TabsTrigger>
+            <TabsTrigger value="blog">
+              <Link href="/blog">Blog</Link>
+            </TabsTrigger>
           </TabsList>
         </Tabs>
 
@@ -117,13 +129,43 @@ export default function HomePage() {
         <section className="max-w-3xl mx-auto text-center mt-12 px-4 space-y-6">
           <h2 className="text-3xl font-bold">Welcome to LifePlanner.fit</h2>
           <p>
-            LifePlanner.fit is your all-in-one solution for <Link href="/meal-planner" className="text-blue-600 underline">meal planning</Link>, <Link href="/calorie-calculator" className="text-blue-600 underline">calorie tracking</Link>, <Link href="/workout-generator" className="text-blue-600 underline">custom workouts</Link>, and travel management.
+            LifePlanner.fit is your all-in-one solution for{" "}
+            <Link href="/meal-planner" className="text-blue-600 underline">
+              meal planning
+            </Link>
+            ,{" "}
+            <Link
+              href="/calorie-calculator"
+              className="text-blue-600 underline"
+            >
+              calorie tracking
+            </Link>
+            ,{" "}
+            <Link
+              href="/workout-generator"
+              className="text-blue-600 underline"
+            >
+              custom workouts
+            </Link>
+            , and travel management.
           </p>
           <h3 className="text-2xl font-semibold">Plan Your Fitness Goals</h3>
-          <p>Create personalized meal plans, track your daily calorie intake, and generate workouts suited to your needs.</p>
+          <p>
+            Create personalized meal plans, track your daily calorie intake, and
+            generate workouts suited to your needs.
+          </p>
           <h3 className="text-2xl font-semibold">Organize Your Travel</h3>
-          <p>Manage travel budgets and design trip itineraries efficiently to save time and money.</p>
-          <p>Discover more tools and <Link href="/blog" className="text-blue-600 underline">read our blog</Link> for tips on nutrition, fitness, and travel.</p>
+          <p>
+            Manage travel budgets and design trip itineraries efficiently to
+            save time and money.
+          </p>
+          <p>
+            Discover more tools and{" "}
+            <Link href="/blog" className="text-blue-600 underline">
+              read our blog
+            </Link>{" "}
+            for tips on nutrition, fitness, and travel.
+          </p>
         </section>
       </main>
 
