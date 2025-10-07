@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ToolsNav } from "@/components/ToolsNav";
 import { ArrowLeft, Clock } from "lucide-react";
+import Footer from "@/components/Footer";
 
 interface Activity {
   time: string;
@@ -220,10 +221,14 @@ export default function TripItinerary() {
         </Card>
 
         {/* Footer Ad */}
-        <div className="w-full h-20 bg-gray-200 dark:bg-gray-700 flex items-center justify-center border border-dashed border-gray-400 text-gray-600 rounded-lg">
-          Footer Ad Placeholder
-        </div>
-      </main>
-    </div>
-  );
+<div className="w-full h-20 bg-gray-200 dark:bg-gray-700 flex items-center justify-center border border-dashed border-gray-400 text-gray-600 rounded-lg">
+  Footer Ad Placeholder
+</div>
+
+{/* Global Footer */}
+<Footer />
+</main>
+</div>
+);
 }
+

@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ToolsNav } from "@/components/ToolsNav";
 import { ArrowLeft } from "lucide-react";
+import Footer from "@/components/Footer";
 
 interface Exercise {
   name: string;
@@ -292,11 +293,14 @@ export default function WorkoutGenerator() {
           </CardContent>
         </Card>
 
-        {/* Footer Ad */}
-        <div className="w-full mt-12 h-20 bg-gray-200 dark:bg-gray-700 border border-dashed border-gray-400 flex items-center justify-center text-gray-600">
-          Footer Ad Placeholder
-        </div>
-      </main>
-    </div>
-  );
+       {/* Footer Ad */}
+<div className="w-full mt-12 h-20 bg-gray-200 dark:bg-gray-700 border border-dashed border-gray-400 flex items-center justify-center text-gray-600">
+  Footer Ad Placeholder
+</div>
+
+{/* Global Footer */}
+<Footer />
+</main>
+</div>
+);
 }

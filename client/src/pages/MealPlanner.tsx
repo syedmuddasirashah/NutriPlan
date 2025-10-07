@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ToolsNav } from "@/components/ToolsNav";
 import { ArrowLeft, RefreshCw } from "lucide-react";
-
+import Footer from "@/components/Footer";
 // --- AdBox Component ---
 const AdBox = ({ height = "h-24", text = "Ad Placeholder" }) => (
   <div
@@ -356,11 +356,15 @@ export default function MealPlanner() {
           <AdBox text="Footer Ad" height="h-20" />
         </div>
 
-        {/* Right Sidebar Ad */}
+        -        {/* Right Sidebar Ad */}
         <div className="hidden lg:block w-64">
           <AdBox text="Sidebar Ad" height="h-80" />
         </div>
       </main>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }
+

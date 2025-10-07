@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Footer from "@/components/Footer";
 import {
   Select,
   SelectContent,
@@ -271,13 +272,16 @@ export default function CalorieCalculator() {
           </div>
         </div>
 
-        {/* RIGHT SIDE AD */}
+                {/* RIGHT SIDE AD */}
         <div className="hidden lg:flex flex-col items-center w-1/5">
           <div className="w-full h-64 bg-gray-200 dark:bg-gray-700 border border-dashed border-gray-400 flex items-center justify-center text-gray-600 text-sm">
             Ad Space 5 (Side)
           </div>
         </div>
       </main>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }
