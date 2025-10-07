@@ -66,7 +66,7 @@ export default function HomePage() {
 
       {/* Header */}
       <header className="border-b bg-card sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-2">
           <Link href="/">
             <h1
               className="text-xl md:text-2xl font-bold cursor-pointer px-2 py-1 rounded-md transition-transform duration-200 hover:scale-105"
@@ -76,9 +76,13 @@ export default function HomePage() {
               <span style={{ color: "#333" }}>Planner.fit</span>
             </h1>
           </Link>
+
+          {/* Right side: ToolsNav + ThemeToggle */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <ToolsNav />
-            <ThemeToggle />
+            <div className="block md:hidden">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -86,8 +90,10 @@ export default function HomePage() {
       <main className="max-w-7xl mx-auto px-4 py-12 flex-1 w-full">
         {/* Top Tabs */}
         <Tabs defaultValue="home" className="w-full mb-8">
-          <TabsList className="flex overflow-x-auto gap-2 no-scrollbar px-2 justify-center">
-            <TabsTrigger value="home">Home</TabsTrigger>
+          <TabsList className="flex overflow-x-auto gap-2 no-scrollbar justify-center md:justify-center px-0 sm:px-2">
+            <TabsTrigger value="home" className="ml-1 sm:ml-0">
+              Home
+            </TabsTrigger>
             <TabsTrigger value="about">
               <Link href="/about">About</Link>
             </TabsTrigger>
