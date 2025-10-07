@@ -86,8 +86,7 @@ export default function HomePage() {
       <main className="max-w-7xl mx-auto px-4 py-12 flex-1 w-full">
         {/* Top Tabs */}
         <Tabs defaultValue="home" className="w-full mb-8">
-          {/* ✅ Fixed hover clipping issue */}
-          <TabsList className="flex overflow-visible gap-2 no-scrollbar justify-center pl-1 pr-1">
+          <TabsList className="flex overflow-x-auto gap-2 no-scrollbar px-2 justify-center">
             <TabsTrigger value="home">Home</TabsTrigger>
             <TabsTrigger value="about">
               <Link href="/about">About</Link>
