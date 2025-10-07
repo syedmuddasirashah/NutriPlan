@@ -48,20 +48,24 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Helmet>
-        <title>NutriPlan - Your Personal Fitness & Travel Tools</title>
+        <title>LifePlanner.fit - Your Personal Fitness & Travel Tools</title>
         <meta
           name="description"
-          content="NutriPlan helps you plan meals, track calories, generate workouts, manage travel budgets, and create trip itineraries easily."
+          content="LifePlanner.fit helps you plan meals, track calories, generate workouts, manage travel budgets, and create trip itineraries easily."
         />
-        <meta name="keywords" content="meal planner, calorie calculator, workout generator, travel budget, trip itinerary, NutriPlan" />
+        <meta name="keywords" content="meal planner, calorie calculator, workout generator, travel budget, trip itinerary, LifePlanner.fit" />
       </Helmet>
 
       {/* Header */}
       <header className="border-b bg-card sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <Link href="/">
-            <h1 className="text-xl md:text-2xl font-bold cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md">
-              My Tools
+            <h1
+              className="text-xl md:text-2xl font-bold cursor-pointer px-2 py-1 rounded-md transition-transform duration-200 hover:scale-105"
+              style={{ fontFamily: 'Poppins, sans-serif' }}
+            >
+              <span style={{ color: '#27AE60' }}>Life</span>
+              <span style={{ color: '#333' }}>Planner.fit</span>
             </h1>
           </Link>
           <div className="flex items-center gap-2">
@@ -111,9 +115,9 @@ export default function HomePage() {
 
         {/* SEO Text Section */}
         <section className="max-w-3xl mx-auto text-center mt-12 px-4 space-y-6">
-          <h2 className="text-3xl font-bold">Welcome to NutriPlan</h2>
+          <h2 className="text-3xl font-bold">Welcome to LifePlanner.fit</h2>
           <p>
-            NutriPlan is your all-in-one solution for <Link href="/meal-planner" className="text-blue-600 underline">meal planning</Link>, <Link href="/calorie-calculator" className="text-blue-600 underline">calorie tracking</Link>, <Link href="/workout-generator" className="text-blue-600 underline">custom workouts</Link>, and travel management.
+            LifePlanner.fit is your all-in-one solution for <Link href="/meal-planner" className="text-blue-600 underline">meal planning</Link>, <Link href="/calorie-calculator" className="text-blue-600 underline">calorie tracking</Link>, <Link href="/workout-generator" className="text-blue-600 underline">custom workouts</Link>, and travel management.
           </p>
           <h3 className="text-2xl font-semibold">Plan Your Fitness Goals</h3>
           <p>Create personalized meal plans, track your daily calorie intake, and generate workouts suited to your needs.</p>
@@ -139,7 +143,7 @@ export default function HomePage() {
             <Facebook />
           </div>
           <div className="mt-2 md:mt-0 text-sm text-muted-foreground text-center md:text-left">
-            © 2025 NutriPlan. All rights reserved.
+            © 2025 LifePlanner.fit. All rights reserved.
           </div>
         </div>
       </footer>
