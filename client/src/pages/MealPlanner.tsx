@@ -9,6 +9,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { ToolsNav } from "@/components/ToolsNav";
 import { ArrowLeft, RefreshCw } from "lucide-react";
 import Footer from "@/components/Footer";
+
 // --- AdBox Component ---
 const AdBox = ({ height = "h-24", text = "Ad Placeholder" }) => (
   <div
@@ -112,7 +113,7 @@ export default function MealPlanner() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      {/* HEADER */}
       <header className="border-b bg-card sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 md:gap-4">
@@ -132,32 +133,34 @@ export default function MealPlanner() {
         </div>
       </header>
 
-      {/* Main layout with ads */}
+      {/* MAIN CONTENT */}
       <main className="max-w-7xl mx-auto px-4 py-8 flex flex-col lg:flex-row gap-6">
-        {/* Left Sidebar Ad */}
+        {/* Left Sidebar */}
         <div className="hidden lg:block w-64">
           <AdBox text="Sidebar Ad" height="h-80" />
         </div>
 
-        {/* Main content */}
+        {/* MAIN COLUMN */}
         <div className="flex-1">
           {/* Top Banner Ad */}
           <AdBox text="Top Banner Ad" height="h-20" />
 
-          {/* Main Form */}
-          <Card className="mb-8">
+          {/* FORM */}
+          <Card className="mb-6">
             <CardHeader>
               <CardTitle>Plan Your Meals</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* FORM INPUTS (goal, age, gender, dietType, days, calories) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Goal */}
                 <div className="space-y-2">
                   <Label htmlFor="goal">Goal</Label>
                   <Select
                     value={formData.goal}
                     onValueChange={(value) => setFormData({ ...formData, goal: value })}
                   >
-                    <SelectTrigger id="goal" data-testid="select-goal">
+                    <SelectTrigger id="goal">
                       <SelectValue placeholder="Select goal" />
                     </SelectTrigger>
                     <SelectContent>
@@ -168,6 +171,7 @@ export default function MealPlanner() {
                   </Select>
                 </div>
 
+                {/* Age */}
                 <div className="space-y-2">
                   <Label htmlFor="age">Age</Label>
                   <Input
@@ -176,17 +180,17 @@ export default function MealPlanner() {
                     placeholder="Your age"
                     value={formData.age}
                     onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                    data-testid="input-age"
                   />
                 </div>
 
+                {/* Gender */}
                 <div className="space-y-2">
                   <Label htmlFor="gender">Gender</Label>
                   <Select
                     value={formData.gender}
                     onValueChange={(value) => setFormData({ ...formData, gender: value })}
                   >
-                    <SelectTrigger id="gender" data-testid="select-gender">
+                    <SelectTrigger id="gender">
                       <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
                     <SelectContent>
@@ -197,13 +201,14 @@ export default function MealPlanner() {
                   </Select>
                 </div>
 
+                {/* Diet Type */}
                 <div className="space-y-2">
                   <Label htmlFor="diet">Diet Type</Label>
                   <Select
                     value={formData.dietType}
                     onValueChange={(value) => setFormData({ ...formData, dietType: value })}
                   >
-                    <SelectTrigger id="diet" data-testid="select-diet">
+                    <SelectTrigger id="diet">
                       <SelectValue placeholder="Select diet type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -216,6 +221,7 @@ export default function MealPlanner() {
                   </Select>
                 </div>
 
+                {/* Days */}
                 <div className="space-y-2">
                   <Label htmlFor="days">Number of Days</Label>
                   <Input
@@ -224,10 +230,10 @@ export default function MealPlanner() {
                     placeholder="7"
                     value={formData.days}
                     onChange={(e) => setFormData({ ...formData, days: e.target.value })}
-                    data-testid="input-days"
                   />
                 </div>
 
+                {/* Calories */}
                 <div className="space-y-2">
                   <Label htmlFor="calories">Daily Calories</Label>
                   <Input
@@ -236,20 +242,17 @@ export default function MealPlanner() {
                     placeholder="2000"
                     value={formData.calories}
                     onChange={(e) => setFormData({ ...formData, calories: e.target.value })}
-                    data-testid="input-calories"
                   />
                 </div>
               </div>
 
-              <Button className="w-full" onClick={generateMealPlan} data-testid="button-generate">
+              <Button className="w-full" onClick={generateMealPlan}>
                 Generate Meal Plan
               </Button>
             </CardContent>
           </Card>
 
-          {/* Mid Page Ad */}
-          <AdBox text="Mid-Content Ad" height="h-32" />
-
+          {/* RESULTS + TIPS */}
           {mealPlan && (
             <div className="space-y-6">
               {mealPlan.map((day, dayIndex) => (
@@ -257,87 +260,26 @@ export default function MealPlanner() {
                   <CardHeader>
                     <CardTitle>Day {dayIndex + 1}</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="space-y-2">
+                  <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {(["breakfast", "lunch", "dinner"] as const).map((mealType) => (
+                      <div key={mealType} className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <h3 className="font-semibold">🍳 Breakfast</h3>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => swapMeal(dayIndex, "breakfast")}
-                            data-testid={`button-swap-breakfast-${dayIndex}`}
-                          >
+                          <h3 className="font-semibold">
+                            {mealType === "breakfast" ? "🍳 Breakfast" : mealType === "lunch" ? "🥗 Lunch" : "🍲 Dinner"}
+                          </h3>
+                          <Button variant="ghost" size="sm" onClick={() => swapMeal(dayIndex, mealType)}>
                             <RefreshCw className="h-4 w-4" />
                           </Button>
                         </div>
-                        <p className="text-sm" data-testid={`text-breakfast-${dayIndex}`}>
-                          {day.breakfast.name}
-                        </p>
-                        <p className="text-sm text-muted-foreground font-mono">
-                          {day.breakfast.calories} cal
-                        </p>
+                        <p className="text-sm">{day[mealType].name}</p>
+                        <p className="text-sm text-muted-foreground font-mono">{day[mealType].calories} cal</p>
                       </div>
-
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <h3 className="font-semibold">🥗 Lunch</h3>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => swapMeal(dayIndex, "lunch")}
-                            data-testid={`button-swap-lunch-${dayIndex}`}
-                          >
-                            <RefreshCw className="h-4 w-4" />
-                          </Button>
-                        </div>
-                        <p className="text-sm" data-testid={`text-lunch-${dayIndex}`}>
-                          {day.lunch.name}
-                        </p>
-                        <p className="text-sm text-muted-foreground font-mono">
-                          {day.lunch.calories} cal
-                        </p>
-                      </div>
-
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <h3 className="font-semibold">🍲 Dinner</h3>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => swapMeal(dayIndex, "dinner")}
-                            data-testid={`button-swap-dinner-${dayIndex}`}
-                          >
-                            <RefreshCw className="h-4 w-4" />
-                          </Button>
-                        </div>
-                        <p className="text-sm" data-testid={`text-dinner-${dayIndex}`}>
-                          {day.dinner.name}
-                        </p>
-                        <p className="text-sm text-muted-foreground font-mono">
-                          {day.dinner.calories} cal
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t">
-                      <p className="text-sm font-medium">
-                        Total Daily Intake:{" "}
-                        <span
-                          className="font-mono text-primary"
-                          data-testid={`text-total-${dayIndex}`}
-                        >
-                          {day.breakfast.calories +
-                            day.lunch.calories +
-                            day.dinner.calories}{" "}
-                          cal
-                        </span>
-                      </p>
-                    </div>
+                    ))}
                   </CardContent>
                 </Card>
               ))}
 
+              {/* Tips Card */}
               <Card className="bg-primary/10">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2">💡 Tips</h3>
@@ -352,11 +294,27 @@ export default function MealPlanner() {
             </div>
           )}
 
-          {/* Footer Ad */}
-          <AdBox text="Footer Ad" height="h-20" />
+          {/* STATIC SEO CARD */}
+          <Card className="p-6 bg-card rounded-lg border mt-6">
+            <CardContent className="space-y-4">
+              <h2 className="text-2xl font-bold">Meal Planner Guide</h2>
+              <p>
+                Plan your meals effectively! Use this planner to design a daily meal schedule based on your goals, diet, and preferences.
+              </p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Balance protein, carbs, and fats</li>
+                <li>Include a variety of fruits and vegetables</li>
+                <li>Adjust portion sizes based on your activity level</li>
+                <li>Stay hydrated</li>
+              </ul>
+              <p>
+                For more meal planning ideas, visit our <Link href="/blog/meal-planning-tips">Meal Planning Tips Blog</Link>.
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
-        -        {/* Right Sidebar Ad */}
+        {/* Right Sidebar */}
         <div className="hidden lg:block w-64">
           <AdBox text="Sidebar Ad" height="h-80" />
         </div>
@@ -367,4 +325,3 @@ export default function MealPlanner() {
     </div>
   );
 }
-
